@@ -33,6 +33,14 @@ namespace DataLibrary.DataAccess
             }
         }
 
+        public static List<T> GetUser<T>(string sql, T data)
+        {
+            using (IDbConnection cnn = new SqlConnection(GetConnectionString()))
+            {
+                return cnn.Query<T>(sql, data).ToList();
+            }
+        }
+
     }
 
 

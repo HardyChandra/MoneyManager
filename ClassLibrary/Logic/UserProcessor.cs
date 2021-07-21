@@ -1,14 +1,15 @@
 ﻿using DataLibrary.DataAccess;
 using DataLibrary.Models;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ClassLibrary.Logic
+namespace DataLibrary.Logic
 {
-    public static class UserProccessor 
+    public static class UserProcessor 
     {
         public static int CreateUser(string Name, string Username, string Password)
         {
@@ -24,18 +25,19 @@ namespace ClassLibrary.Logic
 
             return SqlDataAccess.SaveData(sql, data);
         }
-    }
 
-    public static List<User> LoginUser(string Username, string Password)
-    {
-        User data = new User
+        public static List<User> LoginUser(string Username, string Password)
         {
-            Username = Username,
-            Password = Password
-        };
+            User data = new User
+            {
+                Username = Username,
+                Password = Password
+            };
 
-        string sql = @"SELECT * FROM dbo.Users WHERE Username = @Username AND Password = @Password;";
+            string sql = @"SELECT * FROM dbo.Users WHERE Username = @Username AND Password = @Password;";
 
-        return SqlDataAccess.LoadData<User>(sql);
+            return SqlDataAccess.GetUser<User>(sql, data);
+        }
     }
+
 }
