@@ -1,0 +1,24 @@
+Db table
+
+- Category
+CategoryID
+UserID
+CategoryName
+
+- Expenses
+ExpensesID
+CategoryID
+UserID
+ExpensesDetail
+Expenses
+
+-Income
+IncomeID
+UserID
+Income
+
+-Balance
+BalanceID
+UserID
+ExpensesID
+IncomeID

@@ -1,8 +1,11 @@
-﻿using System;
+﻿using MoneyManager.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using DataLibrary;
+using static ClassLibrary.Logic.UserProccessor;
 
 namespace MoneyManager.Controllers
 {
@@ -13,16 +16,31 @@ namespace MoneyManager.Controllers
             return View();
         }
 
-        public ActionResult About()
+        public ActionResult SignUp()
         {
-            ViewBag.Message = "Your application description page.";
+            ViewBag.Message = "Sign Up";
 
             return View();
         }
 
-        public ActionResult Contact()
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult SignUp(User usr)
         {
-            ViewBag.Message = "Your contact page.";
+            if (ModelState.IsValid)
+            {
+                CreateUser(usr.Name, 
+                    usr.Username, 
+                    usr.Password);
+                return RedirectToAction("Index");
+            }
+
+            return View();
+        }
+
+        public ActionResult Login()
+        {
+            ViewBag.Message = "Login";
 
             return View();
         }
