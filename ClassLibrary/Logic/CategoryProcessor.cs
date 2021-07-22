@@ -10,18 +10,18 @@ namespace DataLibrary.Logic
 {
     public static class CategoryProcessor
     {
-        public static int StoreCategory(int UserID, string CategoryName)
+        public static int StoreCategory(string Username, string CategoryName)
         {
             Category data = new Category
             {
-                UserID = UserID,
-                CategoryName = CategoryName        
+                Username = Username,
+                CategoryName = CategoryName
             };
 
             string sql = @"INSERT INTO dbo.Category (UserID, CategoryName) 
                             VALUES ((SELECT UserID FROM Users WHERE Username = @Username), @CategoryName)";
 
-            return SqlDataAccess.SaveData(sql, data); 
+            return SqlDataAccess.SaveData(sql, data);
         }
     }
 }

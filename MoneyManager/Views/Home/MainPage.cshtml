@@ -3,7 +3,11 @@
     ViewBag.Title = "MainPage";
 }
 
-<h2>MainPage</h2>
+<h2>Welcome to Money Manager</h2>
+@if (ViewBag.Username != null)
+            {
+                <h2>Hello, @ViewBag.Username</h2>
+            }
 
 <head>
     <meta charset="utf-8" />

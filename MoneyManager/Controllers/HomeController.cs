@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using DataLibrary;
 using static DataLibrary.Logic.UserProcessor;
 using static DataLibrary.Logic.CategoryProcessor;
+using static DataLibrary.DataAccess.SqlDataAccess;
 
 namespace MoneyManager.Controllers
 {
@@ -30,8 +31,8 @@ namespace MoneyManager.Controllers
         {
             if (ModelState.IsValid)
             {
-                CreateUser(usr.Name, 
-                    usr.Username, 
+                CreateUser(usr.Name,
+                    usr.Username,
                     usr.Password);
                 return RedirectToAction("Index");
             }
@@ -54,24 +55,29 @@ namespace MoneyManager.Controllers
             {
                 var usrLogin = LoginUser(usr.Username, usr.Password);
 
-                if(usrLogin != null)
+                if (usrLogin != null)
                 {
                     ViewBag.message = "LoggedIn";
-                    Session["Username"] = usr.Username;
-
-                    return RedirectToAction("MainPage");
+                    Session["Username"] = usr.Username.ToString();
+           
+                    return RedirectToAction("MainPage", new { Username = usr.Username });
                 }
-                
             }
-
             return View();
         }
 
         public ActionResult AddCategory()
         {
-            ViewBag.Message = "Add Category";
+            if (Session["Username"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+            else
+            {
+                ViewBag.message = "Add Category";
 
-            return View();
+                return View();
+            }
         }
 
         [HttpPost]
@@ -80,15 +86,16 @@ namespace MoneyManager.Controllers
         {
             if (ModelState.IsValid)
             {
-                StoreCategory(add.UserID,
-                    add.CategoryName);
-                return RedirectToAction("Index");
+                StoreCategory(Session["Username"].ToString(),
+                     add.CategoryName);
+
+                return RedirectToAction("MainPage");
             }
 
             return View();
         }
 
-        public ActionResult MainPage(string Username)
+        public ActionResult MainPage()
         {
             if (Session["Username"] == null)
             {
@@ -96,7 +103,7 @@ namespace MoneyManager.Controllers
             }
             else
             {
-                ViewBag.Username = Username;
+                ViewBag.Username = Session["Username"];
                 return View();
             }
         }

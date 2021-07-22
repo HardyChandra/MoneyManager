@@ -22,7 +22,7 @@ namespace DataLibrary.DataAccess
             using (IDbConnection cnn = new SqlConnection(GetConnectionString()))
             {
                 return cnn.Query<T>(sql).ToList();
-            }
+            }    
         }
 
         public static int SaveData<T>(string sql, T data)
@@ -33,15 +33,13 @@ namespace DataLibrary.DataAccess
             }
         }
 
-        public static List<T> GetUser<T>(string sql, T data)
+        public static T GetUser<T>(string sql, T data)
         {
             using (IDbConnection cnn = new SqlConnection(GetConnectionString()))
             {
-                return cnn.Query<T>(sql, data).ToList();
+                return cnn.QueryFirst<T>(sql, data);
             }
         }
 
     }
-
-
 }

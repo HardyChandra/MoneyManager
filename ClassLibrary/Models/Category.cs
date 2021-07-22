@@ -8,8 +8,8 @@ namespace DataLibrary.Models
 {
     public class Category
     {
-        public int CategoryID { get; set; }
         public int UserID { get; set; }
         public string CategoryName { get; set; }
+        public string Username { get; set; }
     }
 }

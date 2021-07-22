@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace DataLibrary.Logic
 {
-    public static class UserProcessor 
+    public static class UserProcessor
     {
         public static int CreateUser(string Name, string Username, string Password)
         {
@@ -26,7 +26,7 @@ namespace DataLibrary.Logic
             return SqlDataAccess.SaveData(sql, data);
         }
 
-        public static List<User> LoginUser(string Username, string Password)
+        public static User LoginUser(string Username, string Password)
         {
             User data = new User
             {
@@ -34,10 +34,9 @@ namespace DataLibrary.Logic
                 Password = Password
             };
 
-            string sql = @"SELECT * FROM dbo.Users WHERE Username = @Username AND Password = @Password;";
+            string sql = @"SELECT * FROM dbo.Users WHERE Username = @Username AND Password = @Password";
 
             return SqlDataAccess.GetUser<User>(sql, data);
         }
     }
-
 }
