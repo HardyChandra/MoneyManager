@@ -17,11 +17,11 @@ namespace DataLibrary.DataAccess
             return ConfigurationManager.ConnectionStrings[connectionName].ConnectionString;
         }
 
-        public static List<T> LoadData<T>(string sql)
+        public static List<T> LoadData<T>(string sql, T data)
         {
             using (IDbConnection cnn = new SqlConnection(GetConnectionString()))
             {
-                return cnn.Query<T>(sql).ToList();
+                return cnn.Query<T>(sql, data).ToList();
             }    
         }
 
@@ -33,6 +33,22 @@ namespace DataLibrary.DataAccess
             }
         }
 
+        public static int UpdateData<T>(string sql, T data)
+        {
+            using(IDbConnection cnn = new SqlConnection(GetConnectionString()))
+            {
+                return cnn.Execute(sql, data);
+            }
+        }
+
+        public static T GetDataByID<T>(string sql, T data)
+        {
+            using (IDbConnection cnn = new SqlConnection(GetConnectionString()))
+            {
+                return cnn.QueryFirstOrDefault<T>(sql, data);
+            }
+        }
+
         public static T GetUser<T>(string sql, T data)
         {
             using (IDbConnection cnn = new SqlConnection(GetConnectionString()))
@@ -40,6 +56,5 @@ namespace DataLibrary.DataAccess
                 return cnn.QueryFirst<T>(sql, data);
             }
         }
-
     }
 }

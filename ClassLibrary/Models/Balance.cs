@@ -4,12 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataLibrary.Models
+namespace ClassLibrary.Models
 {
-    public class Category
+    public class Balance
     {
-        public int CategoryID { get; set; }
-        public string CategoryName { get; set; }
+        public decimal TotalBalance { get; set; }
         public int UserID { get; set; }
     }
 }

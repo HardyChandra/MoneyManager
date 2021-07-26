@@ -164,8 +164,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataAccess\SqlDataAccess.cs" />
+    <Compile Include="Logic\BalanceProcessor.cs" />
     <Compile Include="Logic\CategoryProcessor.cs" />
     <Compile Include="Logic\UserProcessor.cs" />
+    <Compile Include="Models\Balance.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

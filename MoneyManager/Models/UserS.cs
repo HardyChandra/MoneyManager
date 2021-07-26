@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MoneyManager.Models
 {
-    public class User
+    public class UserS
     {
         [Display(Name = "Name")]
         [Required(ErrorMessage = "Name is required.")]

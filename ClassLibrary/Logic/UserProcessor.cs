@@ -20,7 +20,7 @@ namespace DataLibrary.Logic
                 Password = Password
             };
 
-            string sql = @"INSERT INTO dbo.Users (Name, Username, Password) 
+            string sql = @"INSERT INTO Users (Name, Username, Password) 
                             VALUES (@Name, @Username, @Password);";
 
             return SqlDataAccess.SaveData(sql, data);
@@ -34,7 +34,7 @@ namespace DataLibrary.Logic
                 Password = Password
             };
 
-            string sql = @"SELECT * FROM dbo.Users WHERE Username = @Username AND Password = @Password";
+            string sql = @"SELECT * FROM Users WHERE Username = @Username AND Password = @Password";
 
             return SqlDataAccess.GetUser<User>(sql, data);
         }

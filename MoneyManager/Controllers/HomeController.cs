@@ -7,7 +7,8 @@ using System.Web.Mvc;
 using DataLibrary;
 using static DataLibrary.Logic.UserProcessor;
 using static DataLibrary.Logic.CategoryProcessor;
-using static DataLibrary.DataAccess.SqlDataAccess;
+using static ClassLibrary.Logic.BalanceProcessor;
+using DataLibrary.Models;
 
 namespace MoneyManager.Controllers
 {
@@ -27,7 +28,7 @@ namespace MoneyManager.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult SignUp(User usr)
+        public ActionResult SignUp(UserS usr)
         {
             if (ModelState.IsValid)
             {
@@ -59,16 +60,30 @@ namespace MoneyManager.Controllers
                 {
                     ViewBag.message = "LoggedIn";
                     Session["Username"] = usr.Username.ToString();
-           
-                    return RedirectToAction("MainPage", new { Username = usr.Username });
+                    Session["UserID"] = usrLogin.UserID.ToString();
+                    Session["Name"] = usrLogin.Name.ToString();
+
+                    return RedirectToAction("MainPage");
                 }
             }
             return View();
         }
 
+        public ActionResult MainPage()
+        {
+            if (Session["UserID"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+            else
+            {
+                return View();
+            }
+        }
+
         public ActionResult AddCategory()
         {
-            if (Session["Username"] == null)
+            if (Session["UserID"] == null)
             {
                 return RedirectToAction("Login", "Home");
             }
@@ -82,12 +97,12 @@ namespace MoneyManager.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult AddCategory(AddCategory add)
+        public ActionResult AddCategory(CategoryS add)
         {
             if (ModelState.IsValid)
             {
-                StoreCategory(Session["Username"].ToString(),
-                     add.CategoryName);
+                StoreCategory(Convert.ToInt32(Session["UserID"]),
+                   add.CategoryName);
 
                 return RedirectToAction("MainPage");
             }
@@ -95,17 +110,95 @@ namespace MoneyManager.Controllers
             return View();
         }
 
-        public ActionResult MainPage()
+        public ActionResult ViewCategory()
         {
-            if (Session["Username"] == null)
+            if (Session["UserID"] == null)
             {
                 return RedirectToAction("Login", "Home");
             }
             else
             {
-                ViewBag.Username = Session["Username"];
+                var data = LoadCategory(Convert.ToInt32(Session["UserID"]));
+                List<CategoryS> category = new List<CategoryS>();
+
+                foreach (var row in data)
+                {
+                    category.Add(new CategoryS
+                    {
+                        CategoryID = row.CategoryID,
+                        CategoryName = row.CategoryName, 
+                        UserID = row.UserID
+                    });
+                }
+
+                return View(category);
+            }
+        }
+
+        [HttpGet]
+        public ActionResult UpdateCategory(int? CategoryID)
+        {
+            if (Session["UserID"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+            else
+            {
+                ViewBag.message = "Edit Category";
+                //if (CategoryID == null)
+                //{
+                //    return View();
+                //}
+
+                var category = LoadCategoryByID(Convert.ToInt32(CategoryID));
+
+                return View(category);
+            }
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult UpdateCategory(CategoryS edit)
+        {
+            if (ModelState.IsValid)
+            {
+                EditCategory(edit.CategoryID,
+                    edit.CategoryName);
+
+                return RedirectToAction("ViewCategory");
+            }
+
+            return View();
+        }
+
+
+        public ActionResult AddBalance()
+        {
+            if (Session["UserID"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+            else
+            {
+                ViewBag.message = "Add Balance";
+
                 return View();
             }
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AddBalance(BalanceS add)
+        {
+            if (ModelState.IsValid)
+            {
+                StoreBalance(Convert.ToInt32(Session["UserID"]),
+                     add.TotalBalance);
+
+                return RedirectToAction("MainPage");
+            }
+
+            return View();
         }
     }
 }
