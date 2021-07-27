@@ -60,5 +60,17 @@ namespace DataLibrary.Logic
 
             return SqlDataAccess.UpdateData<Category>(sql, data);
         }
+
+        public static int DeleteCategory(int CategoryID)
+        {
+            Category data = new Category()
+            {
+                CategoryID = CategoryID
+            };
+
+            string sql = @"DELETE FROM Category WHERE CategoryID = @CategoryID";
+
+            return SqlDataAccess.DeleteData<Category>(sql, data);
+        }
     }
 }

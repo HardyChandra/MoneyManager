@@ -104,7 +104,7 @@ namespace MoneyManager.Controllers
                 StoreCategory(Convert.ToInt32(Session["UserID"]),
                    add.CategoryName);
 
-                return RedirectToAction("MainPage");
+                return RedirectToAction("ViewCategory");
             }
 
             return View();
@@ -144,12 +144,7 @@ namespace MoneyManager.Controllers
             }
             else
             {
-                ViewBag.message = "Edit Category";
-                //if (CategoryID == null)
-                //{
-                //    return View();
-                //}
-
+                ViewBag.message = "Edit Category";             
                 var category = LoadCategoryByID(Convert.ToInt32(CategoryID));
 
                 return View(category);
@@ -171,6 +166,31 @@ namespace MoneyManager.Controllers
             return View();
         }
 
+        public ActionResult RemoveCategory(int CategoryID)
+        {
+            if (Session["UserID"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+            else
+            {
+                ViewBag.message = "Delete Category";             
+                var category = LoadCategoryByID(Convert.ToInt32(CategoryID));
+
+                return View(category);
+            }
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult RemoveCategory(CategoryS del)
+        {
+            if(DeleteCategory(del.CategoryID) > 0)
+            {
+                return RedirectToAction("ViewCategory");
+            }
+            return View(del);
+        }
 
         public ActionResult AddBalance()
         {

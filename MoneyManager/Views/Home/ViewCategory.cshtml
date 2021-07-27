@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<MoneyManager.Models.CategoryS>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Add Category", "AddCategory")
 </p>
 <table class="table">
     <tr>
@@ -18,7 +18,7 @@
         </td>
         <td>
             @Html.ActionLink("Edit", "UpdateCategory", new {  CategoryID = item.CategoryID  }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            @Html.ActionLink("Delete", "RemoveCategory", new { CategoryID = item.CategoryID })
         </td>
     </tr>
 }

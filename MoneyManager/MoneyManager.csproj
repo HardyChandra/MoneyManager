@@ -206,6 +206,7 @@
     <Content Include="Views\Home\AddCategory.cshtml" />
     <Content Include="Views\Home\AddBalance.cshtml" />
     <Content Include="Views\Home\ViewCategory.cshtml" />
+    <Content Include="Views\Home\RemoveCategory.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
