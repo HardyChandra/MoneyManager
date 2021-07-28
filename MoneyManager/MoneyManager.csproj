@@ -161,6 +161,7 @@
     </Compile>
     <Compile Include="Models\BalanceS.cs" />
     <Compile Include="Models\CategoryS.cs" />
+    <Compile Include="Models\ExpensesS.cs" />
     <Compile Include="Models\LoginUser.cs" />
     <Compile Include="Models\UserS.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -207,6 +208,10 @@
     <Content Include="Views\Home\AddBalance.cshtml" />
     <Content Include="Views\Home\ViewCategory.cshtml" />
     <Content Include="Views\Home\RemoveCategory.cshtml" />
+    <Content Include="Views\Home\AddExpenses.cshtml" />
+    <Content Include="Views\Home\UpdateExpenses.cshtml" />
+    <Content Include="Views\Home\ViewExpenses.cshtml" />
+    <Content Include="Views\Home\RemoveExpenses.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

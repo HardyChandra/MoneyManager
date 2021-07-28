@@ -8,7 +8,7 @@ namespace ClassLibrary.Models
 {
     public class Balance
     {
-        public decimal TotalBalance { get; set; }
         public int UserID { get; set; }
+        public decimal TotalBalance { get; set; }       
     }
 }

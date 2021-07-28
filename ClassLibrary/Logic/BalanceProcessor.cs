@@ -23,5 +23,17 @@ namespace ClassLibrary.Logic
 
             return SqlDataAccess.SaveData(sql, data);
         }
+
+        public static Balance ViewTotalBalance(int UserID)
+        {
+            Balance data = new Balance()
+            {
+                UserID = UserID
+            };
+
+            string sql = @"SELECT SUM(TotalBalance) FROM Balance WHERE UseriD = @UserID";
+
+            return SqlDataAccess.GetDataByID<Balance>(sql, data);
+        }
     }
 }

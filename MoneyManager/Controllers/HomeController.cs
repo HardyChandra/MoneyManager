@@ -8,6 +8,7 @@ using DataLibrary;
 using static DataLibrary.Logic.UserProcessor;
 using static DataLibrary.Logic.CategoryProcessor;
 using static ClassLibrary.Logic.BalanceProcessor;
+using static ClassLibrary.Logic.ExpensesProcessor;
 using DataLibrary.Models;
 
 namespace MoneyManager.Controllers
@@ -220,5 +221,139 @@ namespace MoneyManager.Controllers
 
             return View();
         }
+
+        //[HttpGet]
+        //public ActionResult TotalBalance(int? UserID)
+        //{
+        //    if (Session["UserID"] == null)
+        //    {
+        //        return RedirectToAction("Login", "Home");
+        //    }
+        //    else
+        //    {
+        //        ViewBag.message = "Total Balance";
+        //        var balance = ViewTotalBalance(Convert.ToInt32(UserID));
+
+        //        return View(balance);
+        //    }
+        //}
+
+        [HttpGet]
+        public ActionResult AddExpenses()
+        {
+            if (Session["UserID"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+            else
+            {
+                var data = LoadCategory(Convert.ToInt32(Session["UserID"]));
+                SelectList list = new SelectList(data, "CategoryID", "CategoryName");
+                ViewBag.CategoryList = list;
+
+                return View();
+            }
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AddExpenses(ExpensesS add)
+        {
+            if (ModelState.IsValid)
+            {
+                SaveExpenses(Convert.ToInt32(Session["UserID"]),
+                   add.CategoryID, add.ExpensesDetail, add.TotalExpenses);
+
+                return RedirectToAction("MainPage");
+            }
+
+            return View();
+        }
+
+        public ActionResult ViewExpenses()
+        {
+            if (Session["UserID"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+            else
+            {
+                var data = LoadExpenses(Convert.ToInt32(Session["UserID"]));
+                List<ExpensesS> expenses = new List<ExpensesS>();
+
+                foreach (var row in data)
+                {
+                    expenses.Add(new ExpensesS
+                    {
+                        ExpensesID = row.ExpensesID,
+                        UserID = row.UserID,
+                        CategoryID = row.CategoryID,
+                        //CategoryName = row.CategoryName,
+                        ExpensesDetail = row.ExpensesDetail,
+                        TotalExpenses = row.TotalExpenses
+                    });
+                }
+
+                return View(expenses);
+            }
+        }
+
+        [HttpGet]
+        public ActionResult UpdateExpenses(int? ExpensesID)
+        {
+            if (Session["UserID"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+            else
+            {
+                ViewBag.message = "Edit Expenses";
+                var expenses = LoadExpensesByID(Convert.ToInt32(ExpensesID));
+
+                return View(expenses);
+            }
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult UpdateExpenses(ExpensesS edit)
+        {
+            if (ModelState.IsValid)
+            {
+                EditExpenses(edit.ExpensesID,
+                    edit.ExpensesDetail, edit.TotalExpenses);
+
+                return RedirectToAction("ViewExpenses");
+            }
+
+            return View();
+        }
+
+        public ActionResult RemoveExpenses(int ExpensesID)
+        {
+            if (Session["UserID"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+            else
+            {
+                ViewBag.message = "Delete Category";
+                var expenses = LoadExpensesByID(Convert.ToInt32(ExpensesID));
+
+                return View(expenses);
+            }
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult RemoveExpenses(ExpensesS del)
+        {
+            if (DeleteExpenses(del.ExpensesID) > 0)
+            {
+                return RedirectToAction("ViewExpenses");
+            }
+            return View(del);
+        }
+
     }
 }

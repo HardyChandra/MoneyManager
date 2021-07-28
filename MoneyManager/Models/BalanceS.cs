@@ -8,6 +8,7 @@ namespace MoneyManager.Models
 {
     public class BalanceS
     {
+        public int UserID { get; set; }
         [Display(Name = "Balance")]
         [Required(ErrorMessage = "Balance Name is required.")]
         public Decimal TotalBalance { get; set; }      
