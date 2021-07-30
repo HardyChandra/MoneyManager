@@ -1,13 +1,10 @@
 ﻿@model MoneyManager.Models.CategoryS
 
-@Scripts.Render("~/bundles/jquery")
-@Scripts.Render("~/bundles/jqueryval")
 
-
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>Add Category</h4>
         <hr />
@@ -31,3 +28,7 @@
 <div>
     @Html.ActionLink("Back to Category", "ViewCategory")
 </div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

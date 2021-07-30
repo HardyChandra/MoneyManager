@@ -35,7 +35,7 @@ namespace ClassLibrary.Logic
             };
 
             string sql = @"SELECT Expenses.*, Category.CategoryName FROM Expenses 
-                            INNER JOIN Category ON Expenses.CategoryID = Category.CategoryID WHERE Expenses.UserID = @UserID";
+                            INNER JOIN Category ON Expenses.CategoryID = Category.CategoryID WHERE Expenses.UserID = @UserID AND Category.UserID = @UserID";
 
             return SqlDataAccess.LoadData<Expenses>(sql, data);
         }
@@ -49,7 +49,7 @@ namespace ClassLibrary.Logic
 
             string sql = @"SELECT * FROM Expenses WHERE ExpensesID = @ExpensesID";
 
-            return SqlDataAccess.GetDataByID<Expenses>(sql, data);
+            return SqlDataAccess.GetData<Expenses>(sql, data);
         }
 
         public static int EditExpenses(int ExpensesID, string ExpensesDetail, decimal TotalExpenses)
@@ -77,5 +77,19 @@ namespace ClassLibrary.Logic
 
             return SqlDataAccess.DeleteData<Expenses>(sql, data);
         }
+
+        //public static Expenses GetTotalExpenses(int UserID)
+        //{
+        //    Expenses data = new Expenses
+        //    {
+        //        UserID = UserID
+        //    };
+
+        //    string sql = @"SELECT SUM(TotalExpenses) AS	'SumExpenses' FROM Expenses WHERE UserID = @UserID";
+
+        //    return SqlDataAccess.GetData<Expenses>(sql, data);
+        //}
+
+        
     }
 }

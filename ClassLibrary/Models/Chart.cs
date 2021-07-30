@@ -6,12 +6,10 @@ using System.Threading.Tasks;
 
 namespace ClassLibrary.Models
 {
-    public class Balance
+    public class Chart
     {
-        public int BalanceID { get; set; }
         public int UserID { get; set; }
-        public decimal TotalBalance { get; set; }
-
-        
+        public string CategoryName { get; set; }
+        public int Total { get; set; }
     }
 }

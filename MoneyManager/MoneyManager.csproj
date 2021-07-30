@@ -199,19 +199,21 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\SignUp.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Home\MainPage.cshtml" />
-    <Content Include="Views\Home\UpdateCategory.cshtml" />
-    <Content Include="Views\Home\AddCategory.cshtml" />
+    <Content Include="Views\Home\ViewBalance.cshtml" />
     <Content Include="Views\Home\AddBalance.cshtml" />
-    <Content Include="Views\Home\ViewCategory.cshtml" />
-    <Content Include="Views\Home\RemoveCategory.cshtml" />
-    <Content Include="Views\Home\AddExpenses.cshtml" />
-    <Content Include="Views\Home\UpdateExpenses.cshtml" />
+    <Content Include="Views\Home\RemoveBalance.cshtml" />
     <Content Include="Views\Home\ViewExpenses.cshtml" />
+    <Content Include="Views\Home\AddExpenses.cshtml" />
     <Content Include="Views\Home\RemoveExpenses.cshtml" />
+    <Content Include="Views\Home\UpdateExpenses.cshtml" />
+    <Content Include="Views\Home\ViewCategory.cshtml" />
+    <Content Include="Views\Home\AddCategory.cshtml" />
+    <Content Include="Views\Home\UpdateCategory.cshtml" />
+    <Content Include="Views\Home\RemoveCategory.cshtml" />
+    <Content Include="Views\Home\Pie.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

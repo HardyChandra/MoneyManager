@@ -1,8 +1,5 @@
 ﻿@model DataLibrary.Models.Category
 
-@Scripts.Render("~/bundles/jquery")
-@Scripts.Render("~/bundles/jqueryval")
-
 
 @using (Html.BeginForm())
 {
@@ -31,3 +28,7 @@
 <div>
     @Html.ActionLink("Back to Category", "ViewCategory")
 </div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

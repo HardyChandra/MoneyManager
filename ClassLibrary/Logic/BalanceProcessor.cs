@@ -24,16 +24,52 @@ namespace ClassLibrary.Logic
             return SqlDataAccess.SaveData(sql, data);
         }
 
-        public static Balance ViewTotalBalance(int UserID)
+        public static List<Balance> LoadBalance(int UserID)
         {
             Balance data = new Balance()
             {
                 UserID = UserID
             };
 
-            string sql = @"SELECT SUM(TotalBalance) FROM Balance WHERE UseriD = @UserID";
+            string sql = @"SELECT * FROM Balance WHERE UserID = @UserID";
 
-            return SqlDataAccess.GetDataByID<Balance>(sql, data);
+            return SqlDataAccess.LoadData<Balance>(sql, data);
         }
+
+        public static Balance LoadBalanceByID(int BalanceID)
+        {
+            Balance data = new Balance()
+            {
+                BalanceID = BalanceID
+            };
+
+            string sql = @"SELECT * FROM Balance WHERE BalanceID = @BalanceID";
+
+            return SqlDataAccess.GetData<Balance>(sql, data);
+        }
+
+        public static int DeleteBalance(int BalanceID)
+        {
+            Balance data = new Balance()
+            {
+                BalanceID = BalanceID
+            };
+
+            string sql = @"DELETE FROM Balance WHERE BalanceID = @BalanceID";
+
+            return SqlDataAccess.DeleteData<Balance>(sql, data);
+        }
+
+        //public static Balance GetTotalBalance(int UserID)
+        //{
+        //    Balance data = new Balance
+        //    {
+        //        UserID = UserID
+        //    };
+
+        //    string sql = @"SELECT SUM(TotalBalance) AS 'SumBalance' FROM Balance WHERE UserID = @UserID";
+
+        //    return SqlDataAccess.GetData<Balance>(sql, data);
+        //}
     }
 }

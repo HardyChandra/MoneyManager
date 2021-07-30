@@ -13,5 +13,13 @@ namespace ClassLibrary.Models
         public int CategoryID { get; set; }
         public string ExpensesDetail { get; set; }
         public decimal TotalExpenses { get; set; }
+
+        public decimal SumExpenses { get; set; }
+
+        //Get CategoryName from Category
+        public string CategoryName { get; set; }
+
+        //Get Total
+        public int Total { get; set; }
     }
 }

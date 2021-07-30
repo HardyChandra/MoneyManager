@@ -36,7 +36,7 @@ namespace DataLibrary.Logic
 
             string sql = @"SELECT * FROM Users WHERE Username = @Username AND Password = @Password";
 
-            return SqlDataAccess.GetUser<User>(sql, data);
+            return SqlDataAccess.GetData<User>(sql, data);
         }
     }
 }

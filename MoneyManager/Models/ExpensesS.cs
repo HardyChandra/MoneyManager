@@ -19,5 +19,8 @@ namespace MoneyManager.Models
         [Display(Name = "Total Expenses")]
         [Required(ErrorMessage = "Total Expenses is required.")]
         public decimal TotalExpenses { get; set; }
+
+        [Display(Name = "Category")]
+        public string CategoryName { get; set; }
     }
 }

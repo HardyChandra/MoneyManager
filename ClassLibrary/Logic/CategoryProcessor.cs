@@ -45,7 +45,7 @@ namespace DataLibrary.Logic
 
             string sql = @"SELECT * FROM Category WHERE CategoryID = @CategoryID";
 
-            return SqlDataAccess.GetDataByID<Category>(sql, data);
+            return SqlDataAccess.GetData<Category>(sql, data);
         }
 
         public static int EditCategory(int CategoryID, string CategoryName)

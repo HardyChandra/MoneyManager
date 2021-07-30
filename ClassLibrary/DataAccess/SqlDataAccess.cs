@@ -49,19 +49,11 @@ namespace DataLibrary.DataAccess
             }
         }
 
-        public static T GetDataByID<T>(string sql, T data)
+        public static T GetData<T>(string sql, T data)
         {
             using (IDbConnection cnn = new SqlConnection(GetConnectionString()))
             {
                 return cnn.QueryFirstOrDefault<T>(sql, data);
-            }
-        }
-
-        public static T GetUser<T>(string sql, T data)
-        {
-            using (IDbConnection cnn = new SqlConnection(GetConnectionString()))
-            {
-                return cnn.QueryFirst<T>(sql, data);
             }
         }
     }

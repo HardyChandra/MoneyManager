@@ -9,12 +9,15 @@ using static DataLibrary.Logic.UserProcessor;
 using static DataLibrary.Logic.CategoryProcessor;
 using static ClassLibrary.Logic.BalanceProcessor;
 using static ClassLibrary.Logic.ExpensesProcessor;
+using static ClassLibrary.Logic.ChartProcessor;
 using DataLibrary.Models;
+
 
 namespace MoneyManager.Controllers
 {
     public class HomeController : Controller
     {
+
         public ActionResult Index()
         {
             return View();
@@ -70,6 +73,13 @@ namespace MoneyManager.Controllers
             return View();
         }
 
+        public ActionResult Logout()
+        {
+            Session.Abandon();
+
+            return RedirectToAction("Index", "Home");
+        }
+
         public ActionResult MainPage()
         {
             if (Session["UserID"] == null)
@@ -78,7 +88,28 @@ namespace MoneyManager.Controllers
             }
             else
             {
+                var Bdata = LoadBalance(Convert.ToInt32(Session["UserID"]));
+                var Edata = LoadExpenses(Convert.ToInt32(Session["UserID"]));
+
+                ViewBag.TB = Bdata.Sum(x => x.TotalBalance);
+                ViewBag.TE = Edata.Sum(x => x.TotalExpenses);
+                ViewBag.T2 = Bdata.Sum(x => x.TotalBalance) - Edata.Sum(x => x.TotalExpenses);
+
                 return View();
+            }
+        }
+
+        public JsonResult Pie()
+        {
+            if (Session["UserID"] != null)
+            {
+                var PData = LoadExpensesChart(Convert.ToInt32(Session["UserID"]));
+                return Json(PData, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                RedirectToAction("Login", "Login");
+                return Json(null);
             }
         }
 
@@ -127,7 +158,7 @@ namespace MoneyManager.Controllers
                     category.Add(new CategoryS
                     {
                         CategoryID = row.CategoryID,
-                        CategoryName = row.CategoryName, 
+                        CategoryName = row.CategoryName,
                         UserID = row.UserID
                     });
                 }
@@ -145,7 +176,7 @@ namespace MoneyManager.Controllers
             }
             else
             {
-                ViewBag.message = "Edit Category";             
+                ViewBag.message = "Edit Category";
                 var category = LoadCategoryByID(Convert.ToInt32(CategoryID));
 
                 return View(category);
@@ -175,7 +206,7 @@ namespace MoneyManager.Controllers
             }
             else
             {
-                ViewBag.message = "Delete Category";             
+                ViewBag.message = "Delete Category";
                 var category = LoadCategoryByID(Convert.ToInt32(CategoryID));
 
                 return View(category);
@@ -186,7 +217,7 @@ namespace MoneyManager.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult RemoveCategory(CategoryS del)
         {
-            if(DeleteCategory(del.CategoryID) > 0)
+            if (DeleteCategory(del.CategoryID) > 0)
             {
                 return RedirectToAction("ViewCategory");
             }
@@ -216,27 +247,61 @@ namespace MoneyManager.Controllers
                 StoreBalance(Convert.ToInt32(Session["UserID"]),
                      add.TotalBalance);
 
-                return RedirectToAction("MainPage");
+                return RedirectToAction("ViewBalance");
             }
 
             return View();
         }
 
-        //[HttpGet]
-        //public ActionResult TotalBalance(int? UserID)
-        //{
-        //    if (Session["UserID"] == null)
-        //    {
-        //        return RedirectToAction("Login", "Home");
-        //    }
-        //    else
-        //    {
-        //        ViewBag.message = "Total Balance";
-        //        var balance = ViewTotalBalance(Convert.ToInt32(UserID));
+        public ActionResult ViewBalance()
+        {
+            if (Session["UserID"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+            else
+            {
+                var data = LoadBalance(Convert.ToInt32(Session["UserID"]));
+                List<BalanceS> balance = new List<BalanceS>();
 
-        //        return View(balance);
-        //    }
-        //}
+                foreach (var row in data)
+                {
+                    balance.Add(new BalanceS
+                    {
+                        BalanceID = row.BalanceID,
+                        UserID = row.UserID,
+                        TotalBalance = row.TotalBalance
+                    });
+                }
+                return View(balance);
+            }
+        }
+
+        public ActionResult RemoveBalance(int BalanceID)
+        {
+            if (Session["UserID"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+            else
+            {
+                ViewBag.message = "Delete Balance";
+                var balance = LoadBalanceByID(Convert.ToInt32(BalanceID));
+
+                return View(balance);
+            }
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult RemoveBalance(BalanceS del)
+        {
+            if (DeleteBalance(del.BalanceID) > 0)
+            {
+                return RedirectToAction("ViewBalance");
+            }
+            return View(del);
+        }
 
         [HttpGet]
         public ActionResult AddExpenses()
@@ -264,7 +329,7 @@ namespace MoneyManager.Controllers
                 SaveExpenses(Convert.ToInt32(Session["UserID"]),
                    add.CategoryID, add.ExpensesDetail, add.TotalExpenses);
 
-                return RedirectToAction("MainPage");
+                return RedirectToAction("ViewExpenses");
             }
 
             return View();
@@ -288,7 +353,7 @@ namespace MoneyManager.Controllers
                         ExpensesID = row.ExpensesID,
                         UserID = row.UserID,
                         CategoryID = row.CategoryID,
-                        //CategoryName = row.CategoryName,
+                        CategoryName = row.CategoryName,
                         ExpensesDetail = row.ExpensesDetail,
                         TotalExpenses = row.TotalExpenses
                     });
@@ -354,6 +419,5 @@ namespace MoneyManager.Controllers
             }
             return View(del);
         }
-
     }
 }
