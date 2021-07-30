@@ -1,11 +1,11 @@
-﻿<h2>Welcome to Money Manager</h2>
+﻿<h1>Welcome to Money Manager</h1>
 @if (Session["UserID"] != null)
 {
-    <h1>Welcome Back, @Session["Name"].ToString()!</h1>
+    <h2>Welcome Back, @Session["Name"].ToString()!</h2><br />
 
-    <label>Total Balance: </label> @ViewBag.TB
+    <h4 style="font-weight: bold">Total Balance: </h4> @ViewBag.TB
     <br />
-    <label>Total Expenses: </label> @ViewBag.TE
+    <h4 style="font-weight: bold">Total Expenses: </h4> @ViewBag.TE
     <br />
-    <label>Total: </label> @ViewBag.T2
+    <h4 style="font-weight: bold">Total: </h4> @ViewBag.T2
 }
