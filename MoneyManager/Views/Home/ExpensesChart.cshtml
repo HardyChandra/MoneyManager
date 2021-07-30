@@ -1,0 +1,55 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+
+        $(document).ready(function() {
+            $.ajax({
+                type: 'POST',
+                dataType: 'json',
+                contentType: 'application/json',
+                url: '@Url.Action("Pie")',
+                    data: '{}',
+                    success: function (Pdata) {
+            
+                        google.charts.load('current', { 'packages': ['corechart'] });
+                        google.charts.setOnLoadCallback(drawChart);
+
+                        function drawChart() {
+                            var data = new google.visualization.DataTable();
+
+                            data.addColumn('string', 'CategoryName');
+                            data.addColumn('number', 'Total');
+
+                            for (var i = 0; i < Pdata.length; i++) {
+                                data.addRow([Pdata[i].CategoryName, Pdata[i].Total]);
+                            }
+
+                            var chart = new google.visualization.PieChart(document.getElementById('chartdiv'));
+
+                            chart.draw(data,
+                                {
+                                    title: "Expenses Chart",
+                                    position: "top",
+                                    fontsize: "14px",
+                                    chartArea: { width: '50%' },
+                                });
+                        }
+                    },
+                    error: function () {
+                        alert("Error loading data! Please try again.");
+                    }
+                });
+            })
+    </script>
+</head>
+<body>
+    <div id="chartdiv" style="width: 900px; height: 500px;"></div>
+</body>
+</html>
+
+
+

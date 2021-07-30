@@ -10,7 +10,7 @@ using static DataLibrary.Logic.CategoryProcessor;
 using static ClassLibrary.Logic.BalanceProcessor;
 using static ClassLibrary.Logic.ExpensesProcessor;
 using static ClassLibrary.Logic.ChartProcessor;
-using DataLibrary.Models;
+
 
 
 namespace MoneyManager.Controllers
@@ -99,17 +99,22 @@ namespace MoneyManager.Controllers
             }
         }
 
-        public JsonResult Pie()
+        public ActionResult ExpensesChart()
+        {
+            return View();
+        }
+
+        public ActionResult Pie()
         {
             if (Session["UserID"] != null)
             {
                 var PData = LoadExpensesChart(Convert.ToInt32(Session["UserID"]));
+
                 return Json(PData, JsonRequestBehavior.AllowGet);
             }
             else
             {
-                RedirectToAction("Login", "Login");
-                return Json(null);
+                return RedirectToAction("Login", "Home");
             }
         }
 

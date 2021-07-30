@@ -17,7 +17,7 @@ namespace ClassLibrary.Logic
                 UserID = UserID
             };
 
-            string sql = @"SELECT Category.CategoryName , COUNT(Expenses.CategoryID) AS Total FROM Expenses 
+            string sql = @"SELECT DISTINCT Category.CategoryName , COUNT(Expenses.CategoryID) AS Total FROM Expenses 
                         INNER JOIN Category ON Expenses.CategoryID = Category.CategoryID WHERE Expenses.UserID = @UserID AND Category.UserID = @UserID 
                         GROUP BY Category.CategoryName";
 

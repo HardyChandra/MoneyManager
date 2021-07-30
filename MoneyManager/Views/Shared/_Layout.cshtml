@@ -29,8 +29,8 @@
                     }
                     else
                     {
-                    <li>@Html.ActionLink("Sign Up", "SignUp", "Home")</li>
-                    <li>@Html.ActionLink("Login", "Login", "Home")</li>
+                        <li>@Html.ActionLink("Sign Up", "SignUp", "Home")</li>
+                        <li>@Html.ActionLink("Login", "Login", "Home")</li>
                     }
                 </ul>
             </div>
@@ -44,8 +44,12 @@
         </footer>
     </div>
 
+
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+
+    
+
     @RenderSection("scripts", required: false)
 </body>
 </html>

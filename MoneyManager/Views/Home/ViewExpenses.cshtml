@@ -37,7 +37,11 @@
     }
 </table>
 
+
 <h4>Total Expenses</h4>
 <div>
     @Model.Sum(i => i.TotalExpenses)
 </div>
+<p>
+    @Html.ActionLink("View Chart", "ExpensesChart")
+</p>
