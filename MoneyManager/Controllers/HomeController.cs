@@ -99,11 +99,13 @@ namespace MoneyManager.Controllers
             }
         }
 
+        //Display the data to Chart from Pie
         public ActionResult ExpensesChart()
         {
             return View();
         }
 
+        //Get Data
         public ActionResult Pie()
         {
             if (Session["UserID"] != null)

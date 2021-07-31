@@ -59,17 +59,5 @@ namespace ClassLibrary.Logic
 
             return SqlDataAccess.DeleteData<Balance>(sql, data);
         }
-
-        //public static Balance GetTotalBalance(int UserID)
-        //{
-        //    Balance data = new Balance
-        //    {
-        //        UserID = UserID
-        //    };
-
-        //    string sql = @"SELECT SUM(TotalBalance) AS 'SumBalance' FROM Balance WHERE UserID = @UserID";
-
-        //    return SqlDataAccess.GetData<Balance>(sql, data);
-        //}
     }
 }

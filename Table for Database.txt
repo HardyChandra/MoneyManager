@@ -1,5 +1,11 @@
 Db table
 
+-Users
+UserID
+Name
+Username
+Password
+
 - Category
 CategoryID
 UserID
@@ -10,15 +16,9 @@ ExpensesID
 CategoryID
 UserID
 ExpensesDetail
-Expenses
-
--Income
-IncomeID
-UserID
-Income
+TotalExpenses
 
 -Balance
 BalanceID
 UserID
-ExpensesID
-IncomeID
+TotalBalance

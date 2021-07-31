@@ -76,20 +76,6 @@ namespace ClassLibrary.Logic
             string sql = @"DELETE FROM Expenses WHERE ExpensesID = @ExpensesID";
 
             return SqlDataAccess.DeleteData<Expenses>(sql, data);
-        }
-
-        //public static Expenses GetTotalExpenses(int UserID)
-        //{
-        //    Expenses data = new Expenses
-        //    {
-        //        UserID = UserID
-        //    };
-
-        //    string sql = @"SELECT SUM(TotalExpenses) AS	'SumExpenses' FROM Expenses WHERE UserID = @UserID";
-
-        //    return SqlDataAccess.GetData<Expenses>(sql, data);
-        //}
-
-        
+        }   
     }
 }
