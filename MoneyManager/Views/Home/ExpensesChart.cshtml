@@ -1,5 +1,9 @@
 ﻿<!DOCTYPE html>
 
+@{
+    ViewBag.Title = "Expenses Chart";
+}
+
 <html>
 <head>
     <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
@@ -14,7 +18,7 @@
                 url: '@Url.Action("Pie")',
                     data: '{}',
                     success: function (Pdata) {
-            
+
                         google.charts.load('current', { 'packages': ['corechart'] });
                         google.charts.setOnLoadCallback(drawChart);
 

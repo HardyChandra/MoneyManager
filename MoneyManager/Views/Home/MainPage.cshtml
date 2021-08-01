@@ -1,11 +1,21 @@
-﻿<h1>Welcome to Money Manager</h1>
+﻿
+@{
+    ViewBag.Title = "Home Page";
+}
+
+
+<h1>Welcome to Money Manager</h1>
 @if (Session["UserID"] != null)
 {
-    <h2>Welcome Back, @Session["Name"].ToString()!</h2><br />
+    <h2>Welcome Back, @Session["Name"].ToString()!</h2>
+    <br />
 
-    <h4 style="font-weight: bold">Total Balance: </h4> @ViewBag.TB
+    <h4 style="font-weight: bold">Total Balance: </h4>
+    @ViewBag.TB
     <br />
-    <h4 style="font-weight: bold">Total Expenses: </h4> @ViewBag.TE
+    <h4 style="font-weight: bold">Total Expenses: </h4>
+    @ViewBag.TE
     <br />
-    <h4 style="font-weight: bold">Total: </h4> @ViewBag.T2
+    <h4 style="font-weight: bold">Total: </h4>
+    @ViewBag.T2
 }

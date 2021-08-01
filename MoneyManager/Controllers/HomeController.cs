@@ -320,7 +320,7 @@ namespace MoneyManager.Controllers
             else
             {
                 var data = LoadCategory(Convert.ToInt32(Session["UserID"]));
-                SelectList list = new SelectList(data, "CategoryID", "CategoryName");
+                SelectList list = new SelectList(data, "CategoryID" /*"CategoryName"*/);
                 ViewBag.CategoryList = list;
 
                 return View();
