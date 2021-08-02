@@ -47,8 +47,6 @@ namespace MoneyManager.Controllers
 
         public ActionResult Login()
         {
-            ViewBag.Message = "Login";
-
             return View();
         }
 
@@ -68,6 +66,11 @@ namespace MoneyManager.Controllers
                     Session["Name"] = usrLogin.Name.ToString();
 
                     return RedirectToAction("MainPage");
+                }
+                else
+                {
+                    ViewBag.Message = "Incorrect Password!";
+                    return View();
                 }
             }
             return View();
