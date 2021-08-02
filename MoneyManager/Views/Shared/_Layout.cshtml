@@ -19,20 +19,26 @@
                 @Html.ActionLink("Money Manager", "MainPage", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    @if (Session["UserID"] != null)
-                    {
+                @if (Session["UserID"] != null)
+                {
+                    <ul class="nav navbar-nav">
                         <li>@Html.ActionLink("Category", "ViewCategory", "Home")</li>
                         <li>@Html.ActionLink("Balance", "ViewBalance", "Home")</li>
                         <li>@Html.ActionLink("Expenses", "ViewExpenses", "Home")</li>
+
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>@Html.ActionLink(@Session["Name"].ToString(), "ViewUserProfile", "Home")</li>
                         <li>@Html.ActionLink("Logout", "Logout", "Home")</li>
-                    }
-                    else
-                    {
+                    </ul>
+                }
+                else
+                {
+                    <ul class="nav navbar-nav navbar-right">
                         <li>@Html.ActionLink("Sign Up", "SignUp", "Home")</li>
                         <li>@Html.ActionLink("Login", "Login", "Home")</li>
-                    }
-                </ul>
+                    </ul>
+                }
             </div>
         </div>
     </div>
@@ -48,7 +54,7 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
 
-    
+
 
     @RenderSection("scripts", required: false)
 </body>

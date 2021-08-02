@@ -39,7 +39,7 @@ namespace MoneyManager.Controllers
                 CreateUser(usr.Name,
                     usr.Username,
                     usr.Password);
-                return RedirectToAction("Index");
+                return RedirectToAction("MainPage");
             }
 
             return View();
@@ -425,6 +425,51 @@ namespace MoneyManager.Controllers
                 return RedirectToAction("ViewExpenses");
             }
             return View(del);
+        }
+
+        public ActionResult ViewUserProfile()
+        {
+            if (Session["UserID"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+            else
+            {
+                var user = LoadUserProfile(Convert.ToInt32(Session["UserID"]));
+               
+                return View(user);
+            }
+        }
+
+        [HttpGet]
+        public ActionResult EditUserProfile(int? UserID)
+        {
+            if (Session["UserID"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+            else
+            {
+                ViewBag.message = "Edit Expenses";
+                var user = LoadUserProfile(Convert.ToInt32(UserID));
+
+                return View(user);
+            }
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditUserProfile(UserProfile edit)
+        {
+            if (ModelState.IsValid)
+            {
+                EditUser(edit.UserID,
+                    edit.Name, edit.PhoneNumber, edit.Email);
+
+                return RedirectToAction("ViewUserProfile");
+            }
+
+            return View();
         }
     }
 }

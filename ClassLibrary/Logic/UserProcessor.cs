@@ -38,5 +38,33 @@ namespace DataLibrary.Logic
 
             return SqlDataAccess.GetData<User>(sql, data);
         }
+
+        public static User LoadUserProfile(int UserID)
+        {
+            User data = new User
+            {
+                UserID = UserID
+            };
+
+            string sql = @"SELECT * FROM Users WHERE UserID = @UserID";
+
+            return SqlDataAccess.GetData<User>(sql, data);
+          
+        }
+
+        public static int EditUser(int UserID, string Name, string PhoneNumber, string Email)
+        {
+            User data = new User()
+            {
+                UserID = UserID,
+                Name = Name,
+                PhoneNumber = PhoneNumber,
+                Email = Email
+            };
+
+            string sql = @"UPDATE Users SET Name = @Name, PhoneNumber = @PhoneNumber, Email = @Email";
+
+            return SqlDataAccess.UpdateData<User>(sql, data);
+        }
     }
 }

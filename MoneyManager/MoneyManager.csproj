@@ -163,6 +163,7 @@
     <Compile Include="Models\CategoryS.cs" />
     <Compile Include="Models\ExpensesS.cs" />
     <Compile Include="Models\LoginUser.cs" />
+    <Compile Include="Models\UserProfile.cs" />
     <Compile Include="Models\UserS.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -217,6 +218,8 @@
     <Content Include="Views\Home\UpdateCategory.cshtml" />
     <Content Include="Views\Home\RemoveCategory.cshtml" />
     <Content Include="Views\Home\ExpensesChart.cshtml" />
+    <Content Include="Views\Home\ViewUserProfile.cshtml" />
+    <Content Include="Views\Home\EditUserProfile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
