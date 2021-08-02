@@ -66,5 +66,18 @@ namespace DataLibrary.Logic
 
             return SqlDataAccess.UpdateData<User>(sql, data);
         }
+
+        public static int ChangePassword(int UserID,string Password)
+        {
+            User data = new User()
+            {
+                UserID = UserID,
+                Password = Password
+            };
+
+            string sql = @"UPDATE Users SET Password = @Password WHERE UserID = @UserID";
+
+            return SqlDataAccess.UpdateData<User>(sql, data);
+        }
     }
 }

@@ -163,6 +163,7 @@
     <Compile Include="Models\CategoryS.cs" />
     <Compile Include="Models\ExpensesS.cs" />
     <Compile Include="Models\LoginUser.cs" />
+    <Compile Include="Models\PasswordS.cs" />
     <Compile Include="Models\UserProfile.cs" />
     <Compile Include="Models\UserS.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -220,6 +221,7 @@
     <Content Include="Views\Home\ExpensesChart.cshtml" />
     <Content Include="Views\Home\ViewUserProfile.cshtml" />
     <Content Include="Views\Home\EditUserProfile.cshtml" />
+    <Content Include="Views\Home\ChangeUserPassword.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

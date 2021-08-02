@@ -439,7 +439,7 @@ namespace MoneyManager.Controllers
             else
             {
                 var user = LoadUserProfile(Convert.ToInt32(Session["UserID"]));
-               
+
                 return View(user);
             }
         }
@@ -468,6 +468,33 @@ namespace MoneyManager.Controllers
             {
                 EditUser(edit.UserID,
                     edit.Name, edit.PhoneNumber, edit.Email);
+
+                return RedirectToAction("ViewUserProfile");
+            }
+
+            return View();
+        }
+
+        public ActionResult ChangeUserPassword()
+        {
+            if (Session["UserID"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+            else
+            {
+                return View();
+            }
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ChangeUserPassword(PasswordS edit)
+        {
+            if (ModelState.IsValid)
+            {
+                ChangePassword(edit.UserID, edit.Password);
 
                 return RedirectToAction("ViewUserProfile");
             }
