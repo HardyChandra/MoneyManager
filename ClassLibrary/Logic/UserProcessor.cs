@@ -62,7 +62,7 @@ namespace DataLibrary.Logic
                 Email = Email
             };
 
-            string sql = @"UPDATE Users SET Name = @Name, PhoneNumber = @PhoneNumber, Email = @Email";
+            string sql = @"UPDATE Users SET Name = @Name, PhoneNumber = @PhoneNumber, Email = @Email WHERE UserID = @UserID";
 
             return SqlDataAccess.UpdateData<User>(sql, data);
         }
