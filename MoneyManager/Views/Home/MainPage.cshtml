@@ -3,7 +3,6 @@
     ViewBag.Title = "Home Page";
 }
 
-
 <h1>Welcome to Money Manager</h1>
 @if (Session["UserID"] != null)
 {
@@ -12,10 +11,17 @@
 
     <h4 style="font-weight: bold">Total Balance: </h4>
     @ViewBag.TB
-    <br />
     <h4 style="font-weight: bold">Total Expenses: </h4>
     @ViewBag.TE
-    <br />
-    <h4 style="font-weight: bold">Total: </h4>
-    @ViewBag.T2
+    <div class="clearfix">
+        <div class="pull-left">
+            <h4 style="font-weight: bold">Total: </h4>
+            @ViewBag.T2
+        </div>
+        <div class="pull-right">
+            <h4 style="font-weight: bold">Current Date </h4>
+            @ViewBag.Time
+        </div>
+    </div>
+
 }

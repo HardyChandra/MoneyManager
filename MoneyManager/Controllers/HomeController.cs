@@ -93,6 +93,7 @@ namespace MoneyManager.Controllers
                 ViewBag.TB = Bdata.Sum(x => x.TotalBalance);
                 ViewBag.TE = Edata.Sum(x => x.TotalExpenses);
                 ViewBag.T2 = Bdata.Sum(x => x.TotalBalance) - Edata.Sum(x => x.TotalExpenses);
+                ViewBag.Time = DateTime.Now.ToString("M-d-yyyy");
 
                 return View();
             }
@@ -472,7 +473,6 @@ namespace MoneyManager.Controllers
                 return View();
             }
         }
-
 
         [HttpPost]
         [ValidateAntiForgeryToken]

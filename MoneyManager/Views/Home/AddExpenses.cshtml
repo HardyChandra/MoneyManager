@@ -32,7 +32,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.TotalExpenses, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.TotalExpenses, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.TotalExpenses, new { htmlAttributes = new { @class = "form-control digit" } })
                 @Html.ValidationMessageFor(model => model.TotalExpenses, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -52,4 +52,13 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+
+    <script type="text/javascript">
+        $(".digit").keypress(function (e) {
+            if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+                $("#errormsg").html("Digits Only").show().fadeOut("slow");
+                return false;
+            }
+        });
+    </script>
 }
