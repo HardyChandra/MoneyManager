@@ -25,8 +25,6 @@ namespace MoneyManager.Controllers
 
         public ActionResult SignUp()
         {
-            ViewBag.Message = "Sign Up";
-
             return View();
         }
 
@@ -131,8 +129,6 @@ namespace MoneyManager.Controllers
             }
             else
             {
-                ViewBag.message = "Add Category";
-
                 return View();
             }
         }
@@ -186,7 +182,6 @@ namespace MoneyManager.Controllers
             }
             else
             {
-                ViewBag.message = "Edit Category";
                 var category = LoadCategoryByID(Convert.ToInt32(CategoryID));
 
                 return View(category);
@@ -216,7 +211,6 @@ namespace MoneyManager.Controllers
             }
             else
             {
-                ViewBag.message = "Delete Category";
                 var category = LoadCategoryByID(Convert.ToInt32(CategoryID));
 
                 return View(category);
@@ -242,8 +236,6 @@ namespace MoneyManager.Controllers
             }
             else
             {
-                ViewBag.message = "Add Balance";
-
                 return View();
             }
         }
@@ -295,7 +287,6 @@ namespace MoneyManager.Controllers
             }
             else
             {
-                ViewBag.message = "Delete Balance";
                 var balance = LoadBalanceByID(Convert.ToInt32(BalanceID));
 
                 return View(balance);
@@ -382,7 +373,6 @@ namespace MoneyManager.Controllers
             }
             else
             {
-                ViewBag.message = "Edit Expenses";
                 var expenses = LoadExpensesByID(Convert.ToInt32(ExpensesID));
 
                 return View(expenses);
@@ -412,7 +402,6 @@ namespace MoneyManager.Controllers
             }
             else
             {
-                ViewBag.message = "Delete Category";
                 var expenses = LoadExpensesByID(Convert.ToInt32(ExpensesID));
 
                 return View(expenses);
@@ -453,7 +442,6 @@ namespace MoneyManager.Controllers
             }
             else
             {
-                ViewBag.message = "Edit Expenses";
                 var user = LoadUserProfile(Convert.ToInt32(UserID));
 
                 return View(user);

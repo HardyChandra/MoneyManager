@@ -14,7 +14,7 @@ namespace MoneyManager.Models
         [DataType(DataType.Password)]
         public string Password { get; set; }
         [Display(Name = "Confirm New Password")]
-        [Compare("Password", ErrorMessage = "You password and confirm password do not match.")]
+        [Compare("Password", ErrorMessage = "You new password and confirm new password do not match.")]
         [DataType(DataType.Password)]
         public string ConfirmPassword { get; set; }
     }
