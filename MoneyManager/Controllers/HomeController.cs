@@ -12,7 +12,6 @@ using static ClassLibrary.Logic.ExpensesProcessor;
 using static ClassLibrary.Logic.ChartProcessor;
 
 
-
 namespace MoneyManager.Controllers
 {
     public class HomeController : Controller
@@ -58,7 +57,6 @@ namespace MoneyManager.Controllers
 
                 if (usrLogin != null)
                 {
-                    ViewBag.message = "LoggedIn";
                     Session["Username"] = usr.Username.ToString();
                     Session["UserID"] = usrLogin.UserID.ToString();
                     Session["Name"] = usrLogin.Name.ToString();
@@ -486,7 +484,6 @@ namespace MoneyManager.Controllers
 
                 return RedirectToAction("ViewUserProfile");
             }
-
             return View();
         }
     }
