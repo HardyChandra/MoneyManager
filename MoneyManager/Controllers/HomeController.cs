@@ -173,7 +173,7 @@ namespace MoneyManager.Controllers
         }
 
         [HttpGet]
-        public ActionResult UpdateCategory(int? CategoryID)
+        public ActionResult UpdateCategory(int CategoryID)
         {
             if (Session["UserID"] == null)
             {
