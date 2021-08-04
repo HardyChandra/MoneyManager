@@ -76,6 +76,6 @@ namespace ClassLibrary.Logic
             string sql = @"DELETE FROM Expenses WHERE ExpensesID = @ExpensesID";
 
             return SqlDataAccess.DeleteData<Expenses>(sql, data);
-        }   
+        }
     }
 }
