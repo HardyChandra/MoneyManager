@@ -1,0 +1,46 @@
+﻿@model MoneyManager.DataLibrary.Models.Expenses
+
+@{
+    ViewBag.Title = "Remove Expenses";
+}
+
+<h1>Remove Expenses</h1>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CategoryID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CategoryID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ExpensesDetail)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ExpensesDetail)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TotalExpenses)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TotalExpenses)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" />
+        </div>
+    }
+</div>

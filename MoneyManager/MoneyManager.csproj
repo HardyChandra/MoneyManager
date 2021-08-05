@@ -155,7 +155,10 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\BalanceController.cs" />
+    <Compile Include="Controllers\CategoryController.cs" />
+    <Compile Include="Controllers\ExpensesController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -204,24 +207,24 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\SignUp.cshtml" />
-    <Content Include="Views\Home\Login.cshtml" />
-    <Content Include="Views\Home\MainPage.cshtml" />
-    <Content Include="Views\Home\ViewBalance.cshtml" />
-    <Content Include="Views\Home\AddBalance.cshtml" />
-    <Content Include="Views\Home\RemoveBalance.cshtml" />
-    <Content Include="Views\Home\ViewExpenses.cshtml" />
-    <Content Include="Views\Home\AddExpenses.cshtml" />
-    <Content Include="Views\Home\RemoveExpenses.cshtml" />
-    <Content Include="Views\Home\UpdateExpenses.cshtml" />
-    <Content Include="Views\Home\ViewCategory.cshtml" />
-    <Content Include="Views\Home\AddCategory.cshtml" />
-    <Content Include="Views\Home\UpdateCategory.cshtml" />
-    <Content Include="Views\Home\RemoveCategory.cshtml" />
-    <Content Include="Views\Home\ExpensesChart.cshtml" />
-    <Content Include="Views\Home\ViewUserProfile.cshtml" />
-    <Content Include="Views\Home\EditUserProfile.cshtml" />
-    <Content Include="Views\Home\ChangeUserPassword.cshtml" />
+    <Content Include="Views\User\SignUp.cshtml" />
+    <Content Include="Views\User\Login.cshtml" />
+    <Content Include="Views\User\MainPage.cshtml" />
+    <Content Include="Views\Balance\ViewBalance.cshtml" />
+    <Content Include="Views\Balance\AddBalance.cshtml" />
+    <Content Include="Views\Balance\RemoveBalance.cshtml" />
+    <Content Include="Views\Expenses\ViewExpenses.cshtml" />
+    <Content Include="Views\Expenses\AddExpenses.cshtml" />
+    <Content Include="Views\Expenses\RemoveExpenses.cshtml" />
+    <Content Include="Views\Expenses\UpdateExpenses.cshtml" />
+    <Content Include="Views\Category\ViewCategory.cshtml" />
+    <Content Include="Views\Category\AddCategory.cshtml" />
+    <Content Include="Views\Category\UpdateCategory.cshtml" />
+    <Content Include="Views\Category\RemoveCategory.cshtml" />
+    <Content Include="Views\Expenses\ExpensesChart.cshtml" />
+    <Content Include="Views\User\ViewUserProfile.cshtml" />
+    <Content Include="Views\User\EditUserProfile.cshtml" />
+    <Content Include="Views\User\ChangeUserPassword.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -240,9 +243,9 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ClassLibrary\DataLibrary.csproj">
-      <Project>{e0e8109c-d1b1-413c-a839-58e252860c8f}</Project>
-      <Name>DataLibrary</Name>
+    <ProjectReference Include="..\MoneyManager.DataLibrary\MoneyManager.DataLibrary.csproj">
+      <Project>{3b73b087-adf7-449e-bb86-bd03355e5c7a}</Project>
+      <Name>MoneyManager.DataLibrary</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
