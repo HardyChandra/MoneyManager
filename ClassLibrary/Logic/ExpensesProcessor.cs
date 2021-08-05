@@ -17,12 +17,12 @@ namespace ClassLibrary.Logic
                 UserID = UserID,
                 CategoryID = CategoryID,
                 ExpensesDetail = ExpensesDetail,
-                TotalExpenses = TotalExpenses
+                TotalExpenses = TotalExpenses,
             };
 
-            string sql = @"INSERT INTO Expenses (UserID, CategoryID, ExpensesDetail, TotalExpenses)
+            string sql = @"INSERT INTO Expenses (UserID, CategoryID, ExpensesDetail, TotalExpenses, CreatedDate)
                             VALUES ((SELECT UserID FROM Users WHERE UserID = @UserID), (SELECT CategoryID FROM Category WHERE CategoryID = @CategoryID),
-                            @ExpensesDetail, @TotalExpenses)";
+                            @ExpensesDetail, @TotalExpenses, GETDATE())";
 
             return SqlDataAccess.SaveData<Expenses>(sql, data);
         }

@@ -13,6 +13,7 @@ namespace ClassLibrary.Models
         public int CategoryID { get; set; }
         public string ExpensesDetail { get; set; }
         public decimal TotalExpenses { get; set; }
+        public DateTime CreatedDate { get; set; }
 
         //Get CategoryName from Category
         public string CategoryName { get; set; }

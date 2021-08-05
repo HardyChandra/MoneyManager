@@ -353,6 +353,7 @@ namespace MoneyManager.Controllers
                         ExpensesID = row.ExpensesID,
                         UserID = row.UserID,
                         CategoryID = row.CategoryID,
+                        CreatedDate = row.CreatedDate,
                         CategoryName = row.CategoryName,
                         ExpensesDetail = row.ExpensesDetail,
                         TotalExpenses = row.TotalExpenses
