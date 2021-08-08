@@ -9,6 +9,11 @@ namespace MoneyManager.Models
     public class PasswordS
     {
         public int UserID { get; set; }
+
+        [Display(Name = "Current Password")]
+        [Required(ErrorMessage = "Current Password is required.")]
+        [DataType(DataType.Password)]
+        public string CurrentPassword { get; set; }
         [Display(Name = "New Password")]
         [Required(ErrorMessage = "Password is required.")]
         [DataType(DataType.Password)]

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using static MoneyManager.DataLibrary.Repository.CategoryProcessor;
+using static MoneyManager.DataLibrary.Repository.ExpensesProcessor;
 
 namespace MoneyManager.Controllers
 {
@@ -30,14 +31,24 @@ namespace MoneyManager.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult AddCategory(CategoryS add)
+        public ActionResult AddCategory(CategoryS add, string CategoryName)
         {
             if (ModelState.IsValid)
             {
-                StoreCategory(Convert.ToInt32(Session["UserID"]),
-                   add.CategoryName);
+                var check = CheckCategory(Convert.ToInt32(Session["UserID"]), CategoryName);
+                if (check.CategoryName != add.CategoryName)
+                {
+                    StoreCategory(Convert.ToInt32(Session["UserID"]),
+                                  add.CategoryName);
 
-                return RedirectToAction("ViewCategory");
+                    return RedirectToAction("ViewCategory");
+                }
+                else
+                {
+                    ViewBag.Message = "Category already exist!";
+                    return View();
+                }
+                
             }
 
             return View();
@@ -116,9 +127,20 @@ namespace MoneyManager.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult RemoveCategory(CategoryS del)
         {
-            if (DeleteCategory(del.CategoryID) > 0)
+            var check = CheckCategoryFromExpenses(Convert.ToInt32(Session["UserID"]));
+            if (del.CategoryID != check.CategoryID)
             {
-                return RedirectToAction("ViewCategory");
+                if (DeleteCategory(del.CategoryID) > 0)
+                {
+                    return RedirectToAction("ViewCategory");
+                }
+            }
+            else
+            {
+                ViewBag.Message = "Cannot delete category because is still in used";
+
+                //return RedirectToAction("ViewCategory");
+                return View();
             }
             return View(del);
         }

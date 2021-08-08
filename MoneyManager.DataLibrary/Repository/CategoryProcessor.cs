@@ -72,5 +72,31 @@ namespace MoneyManager.DataLibrary.Repository
 
             return SqlDataAccess.DeleteData<Category>(sql, data);
         }
+
+        public static Category CheckCategory(int UserID, string CategoryName)
+        {
+            Category data = new Category
+            {
+                UserID = UserID,
+                CategoryName = CategoryName
+            };
+
+            string sql = @"SELECT CategoryName FROM Category WHERE UserID = @UserID";
+
+            return SqlDataAccess.GetData<Category>(sql, data);
+        }
+
+        public static Category CheckCategoryFromExpenses(int UserID)
+        {
+            Category data = new Category()
+            {
+                UserID = UserID,
+            };
+
+            string sql = @"SELECT CategoryID from Expenses
+	                        WHERE UserID = @UserID";
+
+            return SqlDataAccess.GetData<Category>(sql, data);
+        }
     }
 }

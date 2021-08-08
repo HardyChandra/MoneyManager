@@ -22,7 +22,29 @@
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" />
+            <span id="confirmDeleteSpan" style="display:none">
+                <span>Are you sure you want to delete?</span>
+                <button type="submit" class="btn btn-danger">Yes</button>
+                <a href="#" class="btn btn-primary" onclick="confirmDelete(false)">No</a>
+            </span>
+
+            <span id="deleteSpan">
+                <a href="#" class="btn btn-danger" onclick="confirmDelete(true)">Delete</a>
+            </span>
         </div>
+        if (ViewBag.Message != null)
+        {
+            <script type="text/javascript">
+
+            window.onload = function () {
+                alert("@ViewBag.Message");
+            };
+            </script>
+
+        }
     }
 </div>
+
+@section Scripts{
+    <script src="~/Scripts/customJS.js"></script>
+}

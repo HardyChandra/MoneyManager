@@ -40,7 +40,7 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Update" class="btn btn-default" />
+                <input type="submit" value="Update" class="btn btn-primary" />
             </div>
         </div>
     </div>
@@ -57,7 +57,6 @@
          $(".digit").keypress(function (e) {
             if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57))
             {
-                $("#errormsg").html("Digits Only").show().fadeOut("slow");
                 return false;
             }
          });

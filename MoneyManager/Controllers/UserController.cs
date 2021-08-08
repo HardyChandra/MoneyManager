@@ -25,14 +25,25 @@ namespace MoneyManager.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult SignUp(UserS usr)
+        public ActionResult SignUp(UserS usr, string Username)
         {
             if (ModelState.IsValid)
             {
-                CreateUser(usr.Name,
-                    usr.Username,
-                    usr.Password);
-                return RedirectToAction("MainPage");
+                var check = CheckUsername(Username);
+
+                if (check.Username != usr.Username)
+                {
+                    CreateUser(usr.Name,
+                               usr.Username,
+                               usr.Password);
+                    return RedirectToAction("MainPage");
+                }
+                else
+                {
+                    ViewBag.Message = "Username Has Been Registered!";
+                    return View();
+                }
+
             }
 
             return View();
@@ -153,13 +164,23 @@ namespace MoneyManager.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult ChangeUserPassword(PasswordS edit)
+        public ActionResult ChangeUserPassword(PasswordS edit, string password)
         {
             if (ModelState.IsValid)
             {
-                ChangePassword(edit.UserID, edit.Password);
+                var check = CheckPassword(Convert.ToInt32(Session["UserID"]), password);
+                if (check.Password == edit.CurrentPassword)
+                {
+                    ChangePassword(edit.UserID, edit.Password);
 
-                return RedirectToAction("ViewUserProfile");
+                    return RedirectToAction("ViewUserProfile");
+                }
+                else
+                {
+                    ViewBag.Message = "Incorrect Current Password!";
+                    return View();
+                }
+
             }
             return View();
         }
