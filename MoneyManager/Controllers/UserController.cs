@@ -40,7 +40,7 @@ namespace MoneyManager.Controllers
                 }
                 else
                 {
-                    ViewBag.Message = "Username Has Been Registered!";
+                    ViewBag.Message = "Username has been registered!";
                     return View();
                 }
 
@@ -121,7 +121,7 @@ namespace MoneyManager.Controllers
         }
 
         [HttpGet]
-        public ActionResult EditUserProfile(int? UserID)
+        public ActionResult EditUserProfile(int UserID)
         {
             if (Session["UserID"] == null)
             {
