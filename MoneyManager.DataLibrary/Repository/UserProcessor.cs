@@ -91,12 +91,11 @@ namespace MoneyManager.DataLibrary.Repository
             return SqlDataAccess.GetData<User>(sql, data);
         }
 
-        public static User CheckPassword(int UserID, string Password)
+        public static User CheckPassword(int UserID)
         {
             User data = new User
             {
-                UserID = UserID,
-                Password = Password
+                UserID = UserID
             };
 
             string sql = @"SELECT Password FROM Users WHERE UserID = @UserID";

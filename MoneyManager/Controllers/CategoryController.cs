@@ -31,12 +31,12 @@ namespace MoneyManager.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult AddCategory(CategoryS add, string CategoryName)
+        public ActionResult AddCategory(CategoryS add)
         {
             if (ModelState.IsValid)
             {
-                var check = CheckCategory(Convert.ToInt32(Session["UserID"]), CategoryName);
-                if (check.CategoryName != add.CategoryName)
+                var check = CheckCategory(Convert.ToInt32(Session["UserID"]));
+                if (check?.CategoryName != add.CategoryName)
                 {
                     StoreCategory(Convert.ToInt32(Session["UserID"]),
                                   add.CategoryName);
@@ -128,7 +128,7 @@ namespace MoneyManager.Controllers
         public ActionResult RemoveCategory(CategoryS del)
         {
             var check = CheckCategoryFromExpenses(Convert.ToInt32(Session["UserID"]));
-            if (del.CategoryID != check.CategoryID)
+            if (del.CategoryID != check?.CategoryID)
             {
                 if (DeleteCategory(del.CategoryID) > 0)
                 {
@@ -139,7 +139,6 @@ namespace MoneyManager.Controllers
             {
                 ViewBag.Message = "Cannot delete category because is still in used";
 
-                //return RedirectToAction("ViewCategory");
                 return View();
             }
             return View(del);

@@ -164,11 +164,11 @@ namespace MoneyManager.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult ChangeUserPassword(PasswordS edit, string password)
+        public ActionResult ChangeUserPassword(PasswordS edit)
         {
             if (ModelState.IsValid)
             {
-                var check = CheckPassword(Convert.ToInt32(Session["UserID"]), password);
+                var check = CheckPassword(Convert.ToInt32(Session["UserID"]));
                 if (check.Password == edit.CurrentPassword)
                 {
                     ChangePassword(edit.UserID, edit.Password);
