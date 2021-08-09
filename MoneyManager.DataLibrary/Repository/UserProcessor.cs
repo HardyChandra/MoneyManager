@@ -79,12 +79,9 @@ namespace MoneyManager.DataLibrary.Repository
             return SqlDataAccess.UpdateData<User>(sql, data);
         }
 
-        public static User CheckUsername(string Username)
+        public static User CheckUsername( )
         {
-            User data = new User
-            {
-                Username = Username
-            };
+            User data = new User();
 
             string sql = @"SELECT Username FROM Users";
 

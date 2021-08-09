@@ -25,13 +25,13 @@ namespace MoneyManager.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult SignUp(UserS usr, string Username)
+        public ActionResult SignUp(UserS usr)
         {
             if (ModelState.IsValid)
             {
-                var check = CheckUsername(Username);
+                var check = CheckUsername();
 
-                if (check.Username != usr.Username)
+                if (check?.Username != usr.Username)
                 {
                     CreateUser(usr.Name,
                                usr.Username,
@@ -61,20 +61,27 @@ namespace MoneyManager.Controllers
             if (ModelState.IsValid)
             {
                 var usrLogin = LoginUser(usr.Username, usr.Password);
-
-                if (usrLogin != null)
+                var check = CheckUsername();
+                if (check?.Username == usr.Username)
                 {
-                    Session["Username"] = usr.Username.ToString();
-                    Session["UserID"] = usrLogin.UserID.ToString();
-                    Session["Name"] = usrLogin.Name.ToString();
+                    if (usrLogin != null)
+                    {
+                        Session["Username"] = usr.Username.ToString();
+                        Session["UserID"] = usrLogin.UserID.ToString();
+                        Session["Name"] = usrLogin.Name.ToString();
 
-                    return RedirectToAction("MainPage");
+                        return RedirectToAction("MainPage");
+                    }
+                    else
+                    {
+                        ViewBag.Message = "Incorrect Password!";
+                        return View();
+                    }
                 }
                 else
                 {
-                    ViewBag.Message = "Incorrect Password!";
-                    return View();
-                }
+                    ViewBag.Message = "Unregistered Account!";
+                }               
             }
             return View();
         }
