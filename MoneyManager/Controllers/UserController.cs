@@ -80,7 +80,7 @@ namespace MoneyManager.Controllers
                 }
                 else
                 {
-                    ViewBag.Message = "Unregistered Account!";
+                    ViewBag.Message = "Username or password is wrong!";
                 }               
             }
             return View();
