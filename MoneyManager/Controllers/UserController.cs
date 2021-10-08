@@ -29,9 +29,9 @@ namespace MoneyManager.Controllers
         {
             if (ModelState.IsValid)
             {
-                var check = CheckUsername();
+                var check = CheckUsername(usr.Username);
 
-                if (check?.Username != usr.Username)
+                if (check == null)
                 {
                     CreateUser(usr.Name,
                                usr.Username,
@@ -43,9 +43,7 @@ namespace MoneyManager.Controllers
                     ViewBag.Message = "Username has been registered!";
                     return View();
                 }
-
             }
-
             return View();
         }
 
@@ -61,8 +59,8 @@ namespace MoneyManager.Controllers
             if (ModelState.IsValid)
             {
                 var usrLogin = LoginUser(usr.Username, usr.Password);
-                var check = CheckUsername();
-                if (check?.Username == usr.Username)
+                var check = CheckUsername(usr.Username);
+                if (check != null)
                 {
                     if (usrLogin != null)
                     {
@@ -81,7 +79,7 @@ namespace MoneyManager.Controllers
                 else
                 {
                     ViewBag.Message = "Username or password is wrong!";
-                }               
+                }
             }
             return View();
         }
@@ -144,16 +142,31 @@ namespace MoneyManager.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult EditUserProfile(UserProfile edit)
+        public ActionResult EditUserProfile(UserProfile edit, int UserID)
         {
             if (ModelState.IsValid)
             {
-                EditUser(edit.UserID,
-                    edit.Name, edit.PhoneNumber, edit.Email);
+                var check = CheckEmail(edit.Email);
+                if (check == null || check.Email == edit.Email && check.UserID == Convert.ToInt32(UserID))
+                {
+                    var checkPhoneNumber = CheckPhoneNumber(edit.PhoneNumber);
+                    if (checkPhoneNumber == null || checkPhoneNumber.PhoneNumber == edit.PhoneNumber && checkPhoneNumber.UserID == Convert.ToInt32(UserID))
+                    {
+                        EditUser(edit.UserID,
+                                  edit.Name, edit.PhoneNumber, edit.Email);
 
-                return RedirectToAction("ViewUserProfile");
+                        return RedirectToAction("ViewUserProfile");
+                    }
+                    else
+                    {
+                        ViewBag.Message = "Phone Number has been registered!";
+                    }
+                }
+                else
+                {
+                    ViewBag.Message = "Email has been registered!";
+                }
             }
-
             return View();
         }
 

@@ -79,11 +79,14 @@ namespace MoneyManager.DataLibrary.Repository
             return SqlDataAccess.UpdateData<User>(sql, data);
         }
 
-        public static User CheckUsername( )
+        public static User CheckUsername(string Username)
         {
-            User data = new User();
+            User data = new User
+            {
+                Username = Username
+            };
 
-            string sql = @"SELECT Username FROM Users";
+            string sql = @"SELECT * FROM Users WHERE Username = @Username";
 
             return SqlDataAccess.GetData<User>(sql, data);
         }
@@ -96,6 +99,30 @@ namespace MoneyManager.DataLibrary.Repository
             };
 
             string sql = @"SELECT Password FROM Users WHERE UserID = @UserID";
+
+            return SqlDataAccess.GetData<User>(sql, data);
+        }
+
+        public static User CheckEmail(string Email)
+        {
+            User data = new User
+            {
+                Email = Email
+            };
+
+            string sql = @"SELECT * FROM Users WHERE Email = @Email";
+
+            return SqlDataAccess.GetData<User>(sql, data);
+        }
+
+        public static User CheckPhoneNumber(string PhoneNumber)
+        {
+            User data = new User
+            {
+                PhoneNumber = PhoneNumber
+            };
+
+            string sql = @"SELECT * FROM Users WHERE PhoneNumber = @PhoneNumber";
 
             return SqlDataAccess.GetData<User>(sql, data);
         }
